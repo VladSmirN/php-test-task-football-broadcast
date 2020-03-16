@@ -111,6 +111,7 @@
                     <th>#</th>
                     <th>Имя</th>
                     <th></th>
+                    <th>Гол</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -124,6 +125,11 @@
                         </td>
                         <td>
                             {{ player.playTime }}’
+                        </td>
+                        <td>
+                            {% if player.goal  %}
+                                <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/goal.png">
+                            {% endif %}    
                         </td>
                     </tr>
                 {% endfor %}
