@@ -21,6 +21,7 @@ class MatchBuilder
         $match = new Match($id, $dateTime, $tournament, $stadium, $homeTeam, $awayTeam);
 
         $this->processLogs($match, $logs);
+        $this->countTimePosition($match);
 
         return $match;
     }
@@ -73,7 +74,7 @@ class MatchBuilder
         $teamInfo = $event['details']["team$teamNumber"];
         $players = [];
         foreach ($teamInfo['players'] as $playerInfo) {
-            $players[] = new Player($playerInfo['number'], $playerInfo['name']);
+            $players[] = new Player($playerInfo['number'], $playerInfo['name'], $playerInfo['position']);
         }
 
         return new Team($teamInfo['title'], $teamInfo['country'], $teamInfo['logo'], $players, $teamInfo['coach']);
@@ -195,4 +196,20 @@ class MatchBuilder
             )
         );
     }
+    private function countTimePosition(Match $match):void
+    { 
+        $homeTeam = $match->getHomeTeam();
+        foreach( $homeTeam->getPlayers() as $player ){
+
+            $homeTeam->addTimePosition($player->getPosition(), $player->getPlayTime());
+
+        }
+
+        $awayTeam = $match->getAwayTeam();
+        foreach( $awayTeam->getPlayers() as $player ){
+             
+            $awayTeam->addTimePosition($player->getPosition(), $player->getPlayTime());
+
+        }
+    }   
 }

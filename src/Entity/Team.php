@@ -13,6 +13,7 @@ class Team
     private array $players;
     private string $coach;
     private int $goals;
+    private array $timePosition;
 
     public function __construct(string $name, string $country, string $logo, array $players, string $coach)
     {
@@ -24,6 +25,7 @@ class Team
         $this->players = $players;
         $this->coach = $coach;
         $this->goals = 0;
+        $this->timePosition = ["В"=>0,"З"=>0,"П"=>0,"Н"=>0];
     }
 
     public function getName(): string
@@ -103,4 +105,15 @@ class Team
             }
         }
     }
+
+    public function addTimePosition(string $typePosition, int $time):void
+    {
+        $this->timePosition[$typePosition] += $time ;
+    }
+
+    public function getTimePosition(): array
+    {
+        return $this->timePosition;
+    }
+    
 }
