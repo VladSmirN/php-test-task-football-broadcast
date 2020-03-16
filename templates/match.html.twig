@@ -112,6 +112,7 @@
                     <th>Имя</th>
                     <th></th>
                     <th>Гол</th>
+                    <th>Карточки</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -131,6 +132,19 @@
                                 <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/goal.png">
                             {% endif %}    
                         </td>
+                        <td>
+                            {% if player.yellowCard  %}
+                                {% for i in range(0, player.yellowCard - 1)%}
+                                    <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/card.png">
+                                {% endfor %}
+                            {% endif %}   
+                            {% if player.redCard  %}
+                                {% for i in  range(0, player.redCard - 1)  %}
+                                    <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/yellow_red.png">
+                                {% endfor %}
+                            {% endif %}   
+                        </td>
+                        
                     </tr>
                 {% endfor %}
                 </tbody>
